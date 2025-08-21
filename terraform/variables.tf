@@ -19,7 +19,7 @@ variable "purpose" {
 variable "rg_name" {
   description = "The name of the resource group."
   type        = string
-  default     = "rg-deployment-env-demo"
+  default     = "rg-devbox-demo"
 }
 
 variable "kv_name" {

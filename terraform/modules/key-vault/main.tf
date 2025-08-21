@@ -31,7 +31,7 @@ resource "azurerm_key_vault_access_policy" "kv-ap-user" {
 
 
 resource "azurerm_key_vault_secret" "github_pat" {
-  name         = "PAT-gh-ade"
+  name         = "PAT-gh-devbox"
   value        = var.github_pat
   key_vault_id = azurerm_key_vault.kv.id
 

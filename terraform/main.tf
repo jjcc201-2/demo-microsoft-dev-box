@@ -32,13 +32,19 @@ resource "azuread_group_member" "dev_users" {
 module "dev_center" {
   source = "./modules/dev-center"
 
-  name                 = "devcenter-${random_id.rg_name.hex}"
-  location             = var.location
-  resource_group_name  = azurerm_resource_group.rg.name
-  tags                 = local.common_tags # Pass the tags from locals
-  github_uri           = var.github_uri
-  github_pat_secret_id = module.key_vault.github_pat_secret_id
-  github_path          = var.github_path
+  name                    = "devcenter-${random_id.rg_name.hex}"
+  location                = var.location
+  resource_group_name     = azurerm_resource_group.rg.name
+  tags                    = local.common_tags # Pass the tags from locals
+  github_uri              = var.github_uri
+  github_pat_secret_id    = module.key_vault.github_pat_secret_id
+  github_path             = var.github_path
+  db_def_name             = "db-def-${random_id.rg_name.hex}"
+  network_connection_name = "networkconnection-${random_id.rg_name.hex}"
+  subnet_id               = module.virtual_network.subnet_id
+  attached_network_name   = "attachednetwork-${random_id.rg_name.hex}"
+  dev_pool_name           = "devpool-${random_id.rg_name.hex}"
+  project_id              = module.dev_project.id
 }
 
 module "dev_project" {
@@ -66,5 +72,15 @@ module "key_vault" {
   current_user_object_id  = data.azurerm_client_config.current.object_id
 }
 
+module "virtual_network" {
+  source = "./modules/virtual-network"
 
+  name                    = "vnet-${random_id.rg_name.hex}"
+  location                = var.location
+  resource_group_name     = azurerm_resource_group.rg.name
+  address_space           = ["10.0.0.0/16"]
+  subnet_name             = "subnet-${random_id.rg_name.hex}"
+  subnet_address_prefixes = ["10.0.1.0/24"]
+  tags                    = local.common_tags
+}
 

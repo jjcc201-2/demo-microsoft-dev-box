@@ -34,3 +34,33 @@ variable "github_path" {
   description = "GitHub path"
   type        = string
 }
+
+variable "db_def_name" {
+  description = "Name for the Dev Box definition"
+  type        = string
+}
+
+variable "network_connection_name" {
+  description = "Name for the Dev Center network connection"
+  type        = string
+}
+
+variable "subnet_id" {
+  description = "The ID of the created subnet."
+  type        = string
+}
+
+variable "attached_network_name" {
+  description = "Name for the Dev Center attached network"
+  type        = string
+}
+
+variable "dev_pool_name" {
+  description = "Name for the Dev Center project pool"
+  type        = string
+}
+
+variable "project_id" {
+  description = "ID of the Dev Center project"
+  type        = string
+}
