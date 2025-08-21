@@ -1,4 +1,4 @@
-# Azure Deployment Environments Demo 
+# Microsoft Dev Box Demo 
 
 ## Table of Contents
 
@@ -18,9 +18,9 @@
 
 ## Purpose
 
-This repository demonstrates the capabilities of **Azure Deployment Environments** and showcases how to provision and manage cloud-based development environments using **Terraform**. 
+This repository demonstrates the capabilities of **Microsoft Dev Box** and showcases how to provision and manage cloud-based development environments using **Terraform**. 
 
-This demo environment creates a fully functional Azure Deployment Environments infrastructure that allows developers to spin up standardized, cloud-based infrastructure on-demand.
+This demo environment creates a fully functional Microsoft Dev Box infrastructure that allows developers to spin up cloud developer workstations. 
 
 ---
 
@@ -30,32 +30,42 @@ This Terraform configuration deploys the following Azure resources:
 
 - **Azure Dev Center**: Central management hub for developer infrastructure
 - **Dev Center Project**: Project workspace for development teams
+- **Dev Pool**: Pool of cloud workstations for developers
+- **Dev Box Definition**: Configuration for individual dev boxes e.g. CPU, memory, storage, image
 - **Azure Key Vault**: Secure storage for GitHub PAT and other secrets
 - **Azure AD Security Group**: Team access management
 - **Role Assignments**: Proper permissions for dev center operations
+- **Virtual Network**: Network infrastructure for dev boxes
 
-Azure Deployment Environments works by pulling in a catalog of items written in infra-as-code (Bicep, Terraform etc.). Think of this as the products that your developer will be able to spin up using Azure Deployment Environments. 
+This infrastructure provides a developer with the ability to create cloud workstations, based off a defined image and a defined combination of CPU size, memory and storage.
 
-For example, you might have a catalog item to deploy an Azure Web App with a Cosmos DB database.
-
-In a real-world enterprise environment, this catalog would likely be a private repository. Therefore, the usage of a GitHub PAT is to connect to the private repository. This PAT will be stored in the Key Vault and accessed by the Dev Center
+In addition, you can run automated customization tasks after dev box creation. These tasks can install additional software, configure IDE extensions, clone GitHub repositories, and set up your development environment. Tasks are defined as YAML files stored in a GitHub repository catalog.
 
 ---
 
 ## What You'll Build
 
 By the end of this demo, you'll have:
+
 - A fully configured Azure Dev Center
 - A development project with catalog integration
 - A security group for team access control
-- A GitHub-connected catalog for environment templates
+- A GitHub-connected catalog for config-as-code tasks
+- A virtul network and subnet for our dev boxes
+
+This demo will be using pre-determined values for the dev box setup, including: 
+
+- A deployment to UK South region
+- Leveraging a quickstart image from Microsoft for the dev box template (Visual Studio 2022 Enterprise on Windows 10 Enterprise)
+- Default specs of 8 vCPU, 32GB RAM and 256GB Storage for the box spin up 
+
+Once the infrastructure is spun up, you can make different dev box templates with different specs and images
 
 ## Expected Costs
 
 This demo creates resources that may incur minimal Azure costs. Most components are in free tiers, but Key Vault operations may have small charges.
 
-Any product you spin up via an attached catalog through Azure Deployment Environments will incur cost. 
-
+Any dev boxes you spin up through the dev portal will incur a cost
 ---
 
 ## Prerequisites
@@ -129,6 +139,7 @@ az account set --subscription "Your Subscription Name or ID"
 
 The following Azure resource providers must be registered in your subscription:
    - `Microsoft.DevCenter` - For Azure Dev Center resources
+   - `Microsoft.Network` - For virtual networking components
    - `Microsoft.KeyVault` - For Key Vault secrets management
    - `Microsoft.Authorization` - For role assignments
    - `Microsoft.Resources` - For resource group management
@@ -136,6 +147,7 @@ The following Azure resource providers must be registered in your subscription:
    You can register these providers using the Azure CLI:
    ```bash
    az provider register --namespace Microsoft.DevCenter
+   az provider register --namespace Microsoft.Network
    az provider register --namespace Microsoft.KeyVault
    az provider register --namespace Microsoft.Authorization
    az provider register --namespace Microsoft.Resources
@@ -165,15 +177,15 @@ GITHUB_PATH=your_github_path
 ```bash
 # Bash
 GITHUB_URI=https://github.com/<your-github-handle>/devcenter-catalog.git
-GITHUB_PATH=Environment-Definitions
+GITHUB_PATH=Tasks
 ```
 
 
 #### 4. User Configuration [OPTIONAL] 
 
-This demo uses a security group for authorisation to Deployment Environments.
+This demo uses a security group for authorisation to Dev Box.
 
-This approach aligns with Azure Dev Projects best practices, enabling precise control over which development teams can access specific projects and catalogs for provisioning Azure infrastructure.
+This approach aligns with Azure Dev Projects best practices, enabling precise control over which development teams can access specific projects and catalogs for provisioning cloud workstations
 
 If you would like to add more users aside from yourself, such as a specific developer team, you can do so by populating a `users.yaml` file. 
 
@@ -209,14 +221,28 @@ To deploy the resources to your Azure environment, run the following script:
 source ./deploy.sh
 ```
 
-This will check the terraform configuration and proceed to spin up the demo resources in a brand new azure resource group.
+This will check the terraform configuration and proceed to spin up the demo resources in a brand new azure resource group. 
+
+**Note:** The provisioning time may take a few minutes to complete. Wait until you see the following message in the terminal:
+
+```bash
+Terraform apply succeeded.
+```
 
 ---
 ## Usage
 
 1. **Check Azure Portal:**
    - Navigate to your resource group
-   - Verify that a Dev Center, Dev Project and Key Vault have been created
+   - Verify that you can see the following in the resource group:
+      - Dev Center
+      - Dev Project
+      - Dev Box Definition
+      - Dev Pool
+      - Key Vault
+      - Virtual Network
+      - Subnet
+      - Network Connection
    - Verify that your catalog has successfully synced with Dev Center
 
 2. **Test Dev Portal Access:**
@@ -225,8 +251,12 @@ This will check the terraform configuration and proceed to spin up the demo reso
    - You should see your project listed
 
 3. **Verify Catalog Connection:**
-   - In the Dev Portal, try creating a new environment
-   - Your catalog items should be available
+   - In the Dev Portal, try creating a new dev box
+
+![Dev Portal Screenshot](./assets/dev-portal-dev-box.png)
+
+*Figure: Screenshot of the dev portal when a signed-in user has been given the correct permissions to use the service via Azure RBAC*
+
 
 ---
 
@@ -234,7 +264,7 @@ This will check the terraform configuration and proceed to spin up the demo reso
 
 ### Attaching a Private Catalog
 
-As mentioned in the optional pre-requisites, if you would like to attach your own private repository of catalog items and you didn't do so already, you will need to create a GitHub Personal Access Token. 
+As mentioned in the optional pre-requisites, if you would like to attach your own private repository of tasks and you didn't do so already, you will need to create a GitHub Personal Access Token. 
 
 For detailed instructions on how to set this up, refer to the [Microsoft documentation on configuring catalogs](https://learn.microsoft.com/en-gb/azure/deployment-environments/how-to-configure-catalog?tabs=GitHubRepoPAT#create-a-personal-access-token-in-github).
 
