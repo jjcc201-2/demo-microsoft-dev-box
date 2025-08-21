@@ -1,0 +1,13 @@
+__pycache__
+__queuestorage__
+
+# ignore the .terraform directory
+/terraform/secret.tfvars
+/terraform/.terraform
+/terraform/terraform.tfstate
+/terraform/terraform.tfstate.backup
+.terraform.lock.hcl
+
+# ignore environment files
+/.env
+/users.yaml
