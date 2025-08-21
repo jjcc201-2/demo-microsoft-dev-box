@@ -61,6 +61,13 @@ This demo will be using pre-determined values for the dev box setup, including:
 
 Once the infrastructure is spun up, you can make different dev box templates with different specs and images
 
+![Microsoft Dev Box Architecture Diagram](./assets/devbox-diagram.png)
+
+*Figure: High-level architecture of the Microsoft Dev Box demo, showing the relationships between Dev Center, Project, Box Definition, Dev Pool, Key Vault, Security Group, and Catalog integration.*
+
+[🔗 View the diagram full-size](./assets/devbox-diagram.png)
+
+
 ## Expected Costs
 
 This demo creates resources that may incur minimal Azure costs. Most components are in free tiers, but Key Vault operations may have small charges.
