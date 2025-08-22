@@ -81,6 +81,21 @@ Any dev boxes you spin up through the dev portal will incur a cost
 - **Azure Subscription**: Owner or Contributor role
 - **Microsoft Entra ID**: Groups Administrator role or higher
 
+### Licensing
+- **License**: For each prospective user of Dev Box, the following license is needed:
+   - Windows 10 Enterprise or Windows 11 Enterprise
+   - Microsoft Intune
+   - Microsoft Entra ID P1
+
+   **Note:** If you (and any prospective user of Dev Box) have one of the following licenses, this prerequisite is covered:
+   - Microsoft 365 F3
+   - Microsoft 365 E3
+   - Microsoft 365 E5
+   - Microsoft 365 A3
+   - Microsoft 365 A5
+   - Microsoft 365 Business Premium
+   - Microsoft 365 Education Student Use Benefit
+
 
 ### External Requirements
 - GitHub repository with catalog
