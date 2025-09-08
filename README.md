@@ -71,6 +71,7 @@ Once the infrastructure is spun up, you can make different dev box templates wit
 ## Expected Costs
 
 The underlying resources used for this demo will incur minimal Azure costs. Most components are in free tiers, but Key Vault operations may have small charges.
+The underlying resources used for this demo will incur minimal Azure costs. Most components are in free tiers, but Key Vault operations may have small charges.
 
 **However, any Dev Boxes that you choose to manually spin up will incur a cost. It is important to shut down these dev boxes when not in use to reduce costs**
 
