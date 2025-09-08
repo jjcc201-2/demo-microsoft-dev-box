@@ -75,7 +75,7 @@ The underlying resources used for this demo will incur minimal Azure costs. Most
 
 **However, any Dev Boxes that you choose to manually spin up will incur a cost. It is important to shut down these dev boxes when not in use to reduce costs**
 
-You can view how much a Dev Box costs per hour here: ![Dev Box Pricing](https://azure.microsoft.com/en-us/pricing/details/dev-box)
+You can view how much a Dev Box costs per hour here: [Dev Box Pricing](https://azure.microsoft.com/en-us/pricing/details/dev-box)
 
 ---
 
