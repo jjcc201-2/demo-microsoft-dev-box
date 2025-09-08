@@ -45,6 +45,8 @@ module "dev_center" {
   attached_network_name   = "attachednetwork-${random_id.rg_name.hex}"
   dev_pool_name           = "devpool-${random_id.rg_name.hex}"
   project_id              = module.dev_project.id
+  dev_box_image           = var.dev_box_image
+  dev_box_sku             = var.dev_box_sku
 }
 
 module "dev_project" {

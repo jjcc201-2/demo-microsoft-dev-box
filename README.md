@@ -70,9 +70,12 @@ Once the infrastructure is spun up, you can make different dev box templates wit
 
 ## Expected Costs
 
-This demo creates resources that may incur minimal Azure costs. Most components are in free tiers, but Key Vault operations may have small charges.
+The underlying resources used for this demo will incur minimal Azure costs. Most components are in free tiers, but Key Vault operations may have small charges.
 
-Any dev boxes you spin up through the dev portal will incur a cost
+**However, any Dev Boxes that you choose to manually spin up will incur a cost. It is important to shut down these dev boxes when not in use to reduce costs**
+
+You can view how much a Dev Box costs per hour here: ![Dev Box Pricing](https://azure.microsoft.com/en-us/pricing/details/dev-box)
+
 ---
 
 ## Prerequisites
@@ -200,6 +203,13 @@ GITHUB_PATH=your_github_path
 # Bash
 GITHUB_URI=https://github.com/<your-github-handle>/devcenter-catalog.git
 GITHUB_PATH=Tasks
+```
+
+**Note**: the dev box image and SKU values have been specified for you. Once you're familiar with the demo, you can customise these values.
+```bash
+# Bash
+DEV_BOX_IMAGE=microsoftvisualstudio_visualstudioplustools_vs-2022-ent-general-win11-m365-gen2
+DEV_BOX_SKU=general_i_8c32gb256ssd_v2
 ```
 
 

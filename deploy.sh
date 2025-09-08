@@ -3,6 +3,8 @@ export $(grep -v '^#' .env | xargs)
 export TF_VAR_github_pat=$GITHUB_PAT
 export TF_VAR_github_uri=$GITHUB_URI
 export TF_VAR_github_path=$GITHUB_PATH
+export TF_VAR_dev_box_image=$DEV_BOX_IMAGE
+export TF_VAR_dev_box_sku=$DEV_BOX_SKU
 cd terraform
 
 if [ -d ".terraform" ]; then

@@ -44,3 +44,13 @@ variable "github_path" {
   description = "GitHub path"
   type        = string
 }
+
+variable "dev_box_image" {
+  description = "Image to be used for the Dev Box"
+  type        = string
+}
+
+variable "dev_box_sku" {
+  description = "SKU for the Dev Box e.g. 8 core, 32GB RAM, 256GB SSD"
+  type        = string
+}
