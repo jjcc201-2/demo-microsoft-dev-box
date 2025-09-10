@@ -35,7 +35,8 @@ This Terraform configuration deploys the following Azure resources:
 - **Azure Key Vault**: Secure storage for GitHub PAT and other secrets
 - **Azure AD Security Group**: Team access management
 - **Role Assignments**: Proper permissions for dev center operations
-- **Virtual Network**: Network infrastructure for dev boxes
+- **Managed Virtual Network**: Connection to an Azure-managed network infrastructure to host dev boxes
+
 
 This infrastructure provides a developer with the ability to create cloud workstations, based off a defined image and a defined combination of CPU size, memory and storage.
 
@@ -51,15 +52,13 @@ By the end of this demo, you'll have:
 - A development project with catalog integration
 - A security group for team access control
 - A GitHub-connected catalog for config-as-code tasks
-- A virtul network and subnet for our dev boxes
+- A dev pool with a defined dev box template, connected to a Microsoft managed network
 
 This demo will be using pre-determined values for the dev box setup, including: 
 
-- A deployment to UK South region
-- Leveraging a quickstart image from Microsoft for the dev box template (Visual Studio 2022 Enterprise on Windows 10 Enterprise)
-- Default specs of 8 vCPU, 32GB RAM and 256GB Storage for the box spin up 
-
-Once the infrastructure is spun up, you can make different dev box templates with different specs and images
+- Location: UK South Azure region
+- Image: Visual Studio 2022 Enterprise on Windows 11
+- Specs: 8 vCPU, 32GB RAM and 256GB Storage for the Dev Box
 
 ![Microsoft Dev Box Architecture Diagram](./assets/devbox-diagram.png)
 
@@ -71,9 +70,8 @@ Once the infrastructure is spun up, you can make different dev box templates wit
 ## Expected Costs
 
 The underlying resources used for this demo will incur minimal Azure costs. Most components are in free tiers, but Key Vault operations may have small charges.
-The underlying resources used for this demo will incur minimal Azure costs. Most components are in free tiers, but Key Vault operations may have small charges.
 
-**However, any Dev Boxes that you choose to manually spin up will incur a cost. It is important to shut down these dev boxes when not in use to reduce costs**
+**However, any Dev Boxes that you choose to manually spin up will incur a cost. It is important to shut down these dev boxes when not in use to reduce costs. Auto shut-down capability has been included by default in this demo**
 
 You can view how much a Dev Box costs per hour here: ![Dev Box Pricing](https://azure.microsoft.com/en-us/pricing/details/dev-box)
 
@@ -165,7 +163,7 @@ az account set --subscription "Your Subscription Name or ID"
 
 The following Azure resource providers must be registered in your subscription:
    - `Microsoft.DevCenter` - For Azure Dev Center resources
-   - `Microsoft.Network` - For virtual networking components
+   - `Microsoft.Network` - For managed network infrastructure
    - `Microsoft.KeyVault` - For Key Vault secrets management
    - `Microsoft.Authorization` - For role assignments
    - `Microsoft.Resources` - For resource group management
@@ -273,9 +271,6 @@ Terraform apply succeeded.
       - Dev Box Definition
       - Dev Pool
       - Key Vault
-      - Virtual Network
-      - Subnet
-      - Network Connection
    - Verify that your catalog has successfully synced with Dev Center
 
 2. **Test Dev Portal Access:**
