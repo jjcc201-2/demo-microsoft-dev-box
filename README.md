@@ -62,7 +62,7 @@ This demo will be using pre-determined values for the dev box setup, including:
 
 ![Microsoft Dev Box Architecture Diagram](./assets/devbox-diagram.png)
 
-*Figure: High-level architecture of the Microsoft Dev Box demo, showing the relationships between Dev Center, Project, Box Definition, Dev Pool, Key Vault, Security Group, and Catalog integration.*
+*Figure: High-level architecture of the Microsoft Dev Box demo, showing the relationships between Dev Center, Project, Box Definition, Dev Pool in the Microsoft-managed network, Key Vault, Security Group, and Catalog integration.*
 
 [🔗 View the diagram full-size](./assets/devbox-diagram.png)
 
