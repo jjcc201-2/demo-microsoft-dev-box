@@ -40,21 +40,6 @@ variable "db_def_name" {
   type        = string
 }
 
-variable "network_connection_name" {
-  description = "Name for the Dev Center network connection"
-  type        = string
-}
-
-variable "subnet_id" {
-  description = "The ID of the created subnet."
-  type        = string
-}
-
-variable "attached_network_name" {
-  description = "Name for the Dev Center attached network"
-  type        = string
-}
-
 variable "dev_pool_name" {
   description = "Name for the Dev Center project pool"
   type        = string
