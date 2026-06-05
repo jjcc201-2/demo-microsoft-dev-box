@@ -1,5 +1,9 @@
 # Microsoft Dev Box Demo 
 
+> [!WARNING]
+> This repository is **archived**.
+> Microsoft Dev Box was retired as of **November 1, 2025**, so this demo is kept for historical reference only and is no longer actively maintained.
+
 ## Table of Contents
 
 - [Purpose](#purpose)
